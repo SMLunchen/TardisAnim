@@ -16,6 +16,7 @@ int busyPin = 3;  // The pin number of the busy pin.
 int ledPin = 9;
 unsigned long play = 0;
 unsigned long play2 = 0;
+unsigned long play3 = 0;
 
 Wtv020sd16p wtv020sd16p(resetPin,clockPin,dataPin,busyPin);
 
@@ -33,45 +34,62 @@ Serial.println("Serial init complete");
 
 void loop() {
 
+	play = 0;
+	play2 = 0;
+	play3 = 0;
+
 
 	Serial.println("Tardis Landing...");
 	wtv020sd16p.reset();
 	delay(200);
 	//int play;
-	wtv020sd16p.asyncPlayVoice(1);
-    while (play < 40450){
+	//wtv020sd16p.asyncPlayVoice(1);
+	wtv020sd16p.playVoice(1);
+    while (play < 868){
        	play = play + 1;
-    	Serial.println(String(play));
+    	//Serial.println(String(play));
     	fadelight();
+    	delay(30);
     }
     analogWrite(ledPin, 0);
     fadeValue = 0;
     wtv020sd16p.stopVoice();
-/*
+
+
+
     Serial.println("Tardis Starting...");
-    //wtv020sd16p.stopVoice();
+    wtv020sd16p.stopVoice();
     delay(5000);
-    //wtv020sd16p.reset();
+    wtv020sd16p.reset();
+    Serial.println("Sachen tut");
     delay(200);
-    wtv020sd16p.asyncPlayVoice(3);
-    while (play2 < 40500){
+    wtv020sd16p.playVoice(2);
+    while (play2 < 933){
            	play2 = play2 + 1;
-        	Serial.println(String(play2));
+        	//Serial.println(String(play2));
         	fadelight();
+        	delay(30);
     }
     analogWrite(ledPin, 0);
     fadeValue = 0;
-*/
-//delay(5000);
-    	//	wtv020sd16p.asyncPlayVoice(1);
 
-   // Serial.println("Play 1");
-    //wtv020sd16p.playVoice(1);
-   // delay(23000);
-   // Serial.println("Play 2");
-    //wtv020sd16p.playVoice(2);
-    //delay(23000);
-    //wtv020sd16p.stopVoice();
+
+    Serial.println("Tardis Humming...");
+        wtv020sd16p.stopVoice();
+        delay(5000);
+        wtv020sd16p.reset();
+        Serial.println("Sachen tut2");
+        delay(200);
+        wtv020sd16p.playVoice(3);
+        while (play3 < 600){
+               	play3 = play3 + 1;
+            	//Serial.println(String(play2));
+            	fadelight();
+            	delay(30);
+        }
+        analogWrite(ledPin, 0);
+        fadeValue = 0;
+
 
     // check to see if enough time in millis has passed
 }
